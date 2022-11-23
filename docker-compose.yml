@@ -1,0 +1,27 @@
+version: "3"
+services:
+  clipboard-nodeserver:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: clipboard-nodeserver
+    ports:
+      - "8000:8000"
+    networks:
+      - clipboard-app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - clipboard-app
+    volumes:
+      - mongo-data:/data/db
+networks:
+  clipboard-app:
+    driver: bridge
+volumes:
+  mongo-data:
+    driver: local
