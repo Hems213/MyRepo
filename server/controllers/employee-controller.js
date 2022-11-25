@@ -1,6 +1,7 @@
 const Employee = require('../models/employee-model');
 const helper = require('./helper');
-
+const db = require('../db')
+const TestData = require('../testData/testData')
 createEmployee = (req, res) => {
     const body = req.body
 
@@ -80,26 +81,26 @@ getEmployees = async (req, res) => {
     }).catch(err => console.log(err))
 }
 getStats = async (req, res) => {
-    console.log(req.query);
-    const filterCondition = req.query.filterCondition;
-    const criteria = helper.composeMatch(filterCondition);
-    const groupDetails = req.query.aggregateOn;
-    const numericField = req.query.numericField;
-    const group = helper.composeGroup(groupDetails, numericField)
-    console.log("Match", criteria);
-    console.log("Group", group);
+    const pipeline = helper.constructPipeline(req.query);
     try {
-        const result = await Employee.aggregate(
-            [
-                { $match: criteria },
-                {
-                  $group: group
-                }
-              ]
-        );
-        return res.status(200).json({ success: true, data: emp });
+        const result = await Employee.aggregate(pipeline);
+        return res.status(200).json({ success: true, data: result });
     } catch (error) {
-        return res.status(500).json({ success: false, data: error});
+        console.log("Error ise", error);
+        return res.status(500).json({ success: false, data: error });
+    }
+}
+loadTestData = async (req, res)=>{
+    try {
+        const removalResult = await Employee.deleteMany({});
+        TestData.getDataSet().forEach(async empData => {
+            const emp = new Employee(empData);
+            await emp.save();
+        });
+        return res.status(200).json({ success: true });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ success: false, data: err });
     }
 }
 
@@ -108,5 +109,6 @@ module.exports = {
     deleteEmployee,
     getEmployees,
     getEmployeeById,
-    getStats
+    getStats,
+    loadTestData
 }

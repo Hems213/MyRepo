@@ -7,7 +7,8 @@ const Employee = new Schema(
         salary: { type: Number, required: true },
         currency: { type: String, required: true },
         department: { type: String, required: true },
-        sub_department: {type: String, required: true }
+        sub_department: {type: String, required: true },
+        on_contract: {type: String, required: false}
     },
     { timestamps: true },
 )
