@@ -23,6 +23,8 @@ Below are the fields of the schema for Employee object
 
 ## The below API are supported
 
+All the API are protected by an access token set as Bearer in `Authorization` header. Except the hello world
+
  * / - Just prints a hellow world
  * POST /api/employee - Posts a employee data as per above model.
  * DELETE /api/emplouee/:id - delete employee by id     
@@ -30,6 +32,14 @@ Below are the fields of the schema for Employee object
  * GET /api/employee - Lists all employee in the store
  * POST /api/testdata - Loads up a predefined test data given in example
  * GET /employeeStats - Gets SS for dataset - examples below
+
+ ## Authentication & Authorization
+
+All the APIs need access token.
+TO get access token please invoke 
+ * GET /auth/accessToken - This returns a access token that is valid for 1 hour and the token can be set in bearer for authorization
+    * For the routes in /auth module, a basic auth has to be provide. 
+    * Please check for valid username passwords in `authentication/index.js`
 
 ## Stats API (SS)
 
