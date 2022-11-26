@@ -1,6 +1,5 @@
 const Employee = require('../models/employee-model');
 const helper = require('./helper');
-const db = require('../db')
 const TestData = require('../testData/testData')
 createEmployee = (req, res) => {
     const body = req.body

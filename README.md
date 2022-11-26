@@ -38,7 +38,8 @@ All the API are protected by an access token set as Bearer in `Authorization` he
 All the APIs need access token.
 TO get access token please invoke 
  * GET /auth/accessToken - This returns a access token that is valid for 1 hour and the token can be set in bearer for authorization
-    * For the routes in /auth module, a basic auth has to be provide. 
+    * For this API to work basic auth has to be provided in header.
+    * For the routes in /auth module, a basic auth has to be provided. 
     * Please check for valid username passwords in `authentication/index.js`
 
 ## Stats API (SS)
