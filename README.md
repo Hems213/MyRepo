@@ -64,6 +64,7 @@ If unspecified it is the `salary` column.
 Format :  `numericfield=<fieldname>`      
 Example : `numericfield=salary`
 
+* Example - GET /api/employeeStats?filter=currency:USD&aggregateOn=department.sub_department&numericfield=salary
 
 ### Below are the ways of using it.
 
