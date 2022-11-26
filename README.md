@@ -73,3 +73,8 @@ Example : `numericfield=salary`
     * Gets SS with filter params and also aggregated on 2 columns deparatment and currency
 * /api/employeeStats?filter=currency:USD&aggregateOn=department.currency&numericfield=salary
     * Matches the filter criteria and also the aggregate on and also uses the numeric field of salary
+
+### Loading test data
+Please send a authenticated request to below API             
+* POST /api/testdata - Loads up a predefined test data given in example        
+Post with empty body and it will load up a predefined test data set. Before loading it clears all the existing data. 
